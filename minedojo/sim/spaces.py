@@ -490,7 +490,7 @@ class MultiDiscrete(gym.spaces.MultiDiscrete, MineRLSpace):
     def sample(self, bs=None):
         bdim = () if bs is None else (bs,)
         return (
-            self.np_random.random_sample(bdim + self.nvec.shape) * self.nvec
+            self.np_random.random_sample(*(bdim + self.nvec.shape)) * self.nvec
         ).astype(self.dtype)
 
 
@@ -517,7 +517,7 @@ class Text(MineRLSpace):
     MAX_STR_LEN = 100
 
     def __init__(self, shape):
-        super().__init__(shape, np.unicode_)
+        super().__init__(shape, np.str_)
 
     def sample(self, bs=None):
         total_strings = np.prod(self.shape)
